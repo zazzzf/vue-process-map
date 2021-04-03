@@ -31,6 +31,7 @@
               secondClass(_t,i, $i, t),
               {'depth-selected': t.clicked,'half-line': t.isOnceTwo && !t.extend && !nodeData.extend}
             ]"
+            :style="{'backgroundColor': sColor}"
             @click="secondClick(t)"
           >
             <div class="circel_text font-NotoSansCJKkr-Bold">
@@ -60,7 +61,12 @@
               }"
             >
               <div class="map-third_center_line">
-                <div :class="[thirdClass(_m,n,_n, formatData(t)),{'half-line': m.isOnceTwo, 'third-checked': m.checked || m.focus, 'dis-checked': disChecked, 'allow-checked': m.allowClick}]" @click="changeThirdStatus(m)">
+                <div :class="[
+                  thirdClass(_m,n,_n, formatData(t)),
+                  {'half-line': m.isOnceTwo, 'third-checked': m.checked || m.focus, 'dis-checked': disChecked, 'allow-checked': m.allowClick}
+                ]" 
+                :style="{'backgroundColor': tColor}"
+                @click="changeThirdStatus(m)">
                   <div class="third_text">
                     {{ m.stepName }}
                   </div>
@@ -91,6 +97,14 @@ export default {
     isFocus: {
       type: Boolean,
       default: false
+    },
+    sColor: {
+      type: String,
+      default: '#f7acbc'
+    },
+    tColor: {
+      type: String,
+      default: '#ef5b9c'
     },
     // 是否禁用三级节点点击 默认不禁用
     disChecked: {

@@ -7,13 +7,13 @@
     "build": "vue-cli-service build",
     "test:unit": "jest --clearCache && vue-cli-service test:unit",
     "lint": "eslint --ext .js,.vue src",
-    "deploy": "node ./node_modules/vue-gh-pages/index.js",
     "build:stage": "vue-cli-service build --mode staging",
     "dev": "vue-cli-service serve",
     "gh-pages": "vue-cli-service gh-pages",
     "preview": "node build/index.js --preview",
     "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
-    "test:ci": "npm run lint && npm run test:unit"
+    "test:ci": "npm run lint && npm run test:unit",
+    "build:gh-pages": "npm run build && vue-cli-service gh-pages"
   },
   "dependencies": {
     "axios": "0.18.1",
@@ -25,7 +25,6 @@
     "nprogress": "0.2.0",
     "path-to-regexp": "2.4.0",
     "vue": "2.6.10",
-    "vue-gh-pages": "^1.19.1",
     "vue-highlightjs": "^1.3.3",
     "vue-router": "3.0.6",
     "vuex": "3.1.0"

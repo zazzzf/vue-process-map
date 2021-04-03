@@ -5,6 +5,8 @@
       <processMap
         :node-data="item"
         :size="config.size?'small':'large'"
+        :sColor="config.sColor"
+        :tColor="config.tColor"
       />
     </div>
     <el-button icon="el-icon-setting" type="primary" class="setting-button" @click="show=!show" />
