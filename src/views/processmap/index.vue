@@ -1,34 +1,34 @@
 <template>
   <div class="dashboard-container">
     <div v-for="item in nodeData" :key="item.stepCode">
-      <h1 style="background: #ccc">{{item.stepName}}</h1>
-      <processMap 
-      :nodeData="item"
-      :size="config.size?'small':'large'"
-       />
+      <h1 style="background: #ccc">{{ item.stepName }}</h1>
+      <processMap
+        :node-data="item"
+        :size="config.size?'small':'large'"
+      />
     </div>
-    <el-button icon="el-icon-setting" @click="show=!show" type="primary" class="setting-button"></el-button>
+    <el-button icon="el-icon-setting" type="primary" class="setting-button" @click="show=!show" />
     <el-dialog :visible.sync="showmock" title="demo data">
       <!-- or literal code works as well -->
-      <highlightjs language='javascript' class="atom-one-dark" :code="demoMockData" />
+      <highlightjs language="javascript" class="atom-one-dark" :code="demoMockData" />
     </el-dialog>
-    <el-drawer :visible.sync="show" >
+    <el-drawer :visible.sync="show">
       <p slot="title">Setting Drawer</p>
       <div style="padding: 0 40px">
-      <p>2级色彩设置</p>
-       <el-color-picker v-model="config.sColor"></el-color-picker>
-      <el-divider />
-      <p>3级色彩设置</p>
-       <el-color-picker v-model="config.tColor"></el-color-picker>
-      <el-divider />
-      <p>组件大小 可选 default/small</p>
-      <el-switch v-model="config.size" active-text="small" inactive-text="default" />
-      <el-divider />
-      <p>组件接受参数数据结构</p>
-      <el-button type="primary" @click="showmock =!showmock">查看</el-button>
-      <el-divider />
-      <p>3depth 全部收起</p>
-      <el-switch v-model="config.extendAll" @change="closeAll"  active-text="收起" inactive-text="展开" />
+        <p>2级色彩设置</p>
+        <el-color-picker v-model="config.sColor" />
+        <el-divider />
+        <p>3级色彩设置</p>
+        <el-color-picker v-model="config.tColor" />
+        <el-divider />
+        <p>组件大小 可选 default/small</p>
+        <el-switch v-model="config.size" active-text="small" inactive-text="default" />
+        <el-divider />
+        <p>组件接受参数数据结构</p>
+        <el-button type="primary" @click="showmock =!showmock">查看</el-button>
+        <el-divider />
+        <p>3depth 全部收起</p>
+        <el-switch v-model="config.extendAll" active-text="收起" inactive-text="展开" @change="closeAll" />
       </div>
     </el-drawer>
   </div>
@@ -57,17 +57,17 @@ const mockD = `[
   }, ...
 ]`
 import { mapGetters } from 'vuex'
-import  processMap from '@/components/process-map'
+import processMap from '@/components/process-map'
 import { getMapData } from '@/api/map'
 export default {
   name: 'Dashboard',
-  components: {processMap},
+  components: { processMap },
   computed: {
     ...mapGetters([
       'name'
     ])
   },
-  data(){
+  data() {
     return {
       show: false,
       demoMockData: mockD,
@@ -81,40 +81,40 @@ export default {
       showmock: false
     }
   },
-  created(){
+  created() {
     this.getData()
   },
-  methods:{
-    getData(){
+  methods: {
+    getData() {
       getMapData().then(res => {
         this.initList(res.data)
       })
     },
-    initList(data){
-        let list = data
-        list.forEach((e, _e) => {
-          e.extend = false;
-          e.data && e.data.forEach((i) => {
-          i.extend = true;
+    initList(data) {
+      const list = data
+      list.forEach((e, _e) => {
+        e.extend = false
+        e.data && e.data.forEach((i) => {
+          i.extend = true
           if (i.data && i.data.length > 0) {
-            e.extend = true;
+            e.extend = true
           }
-          i.data && i.data.forEach((t) => {});
-        });
-      });
+          i.data && i.data.forEach((t) => {})
+        })
+      })
       this.nodeData = list
       console.log(this.nodeData)
     },
-    closeAll(type){
-      let list = this.nodeData
-      if(type) {
+    closeAll(type) {
+      const list = this.nodeData
+      if (type) {
         list.forEach(item => {
           item.data.forEach(j => {
             j.extend = false
-          });
+          })
           item.extend = false
         })
-      }else {
+      } else {
         this.initList(list)
       }
     }

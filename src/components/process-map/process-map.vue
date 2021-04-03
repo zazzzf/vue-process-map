@@ -39,21 +39,25 @@
           </div>
         </div>
         <template v-for="(n,_n) in formatData(t)">
-          <div v-show="t.extend" class="third-box_row"
-              :class="[
-                {
-                  'third-box_row_item': _n == 0,
-                  'half-line-third': _n == 0 && n.length == 1
-                },
-                boxRowClass(_n,formatData(t),'3'),
-                thirdVerifyClass(_n,formatData(t),n),
-                ]"
-            >
-            <div v-for="(m,_m) in n" :class="{
-                  'third-box_container': true,
-                  'third-box_container_line': true,
-                  'third-box_once': n.length == 1,
-                }"
+          <div
+            v-show="t.extend"
+            class="third-box_row"
+            :class="[
+              {
+                'third-box_row_item': _n == 0,
+                'half-line-third': _n == 0 && n.length == 1
+              },
+              boxRowClass(_n,formatData(t),'3'),
+              thirdVerifyClass(_n,formatData(t),n),
+            ]"
+          >
+            <div
+              v-for="(m,_m) in n"
+              :class="{
+                'third-box_container': true,
+                'third-box_container_line': true,
+                'third-box_once': n.length == 1,
+              }"
             >
               <div class="map-third_center_line">
                 <div :class="[thirdClass(_m,n,_n, formatData(t)),{'half-line': m.isOnceTwo, 'third-checked': m.checked || m.focus, 'dis-checked': disChecked, 'allow-checked': m.allowClick}]" @click="changeThirdStatus(m)">
@@ -92,12 +96,12 @@ export default {
     disChecked: {
       type: Boolean,
       default: false
-    },
+    }
   },
   data() {
     return {
       currentData: {},
-      statusArr: ['',"완료","결재중",""],
+      statusArr: ['', '완료', '결재중', ''],
       // 日志参数
       logParam: {
         projectCode: '',
@@ -123,13 +127,13 @@ export default {
   },
   methods: {
     secondClass(_t, i, $i, t) {
-      let _this = this
+      const _this = this
       var _i = i.length
       var classStr = `map-circle_box flex_center `
       if (this.fromTree) {
         classStr = `map-circle_box_tree flex_center `
       }
-      function onlyOneNode(){
+      function onlyOneNode() {
         let classString = ''
         if (!t.extend) {
           if ($i === _this.secondData.length - 1) {
@@ -148,7 +152,7 @@ export default {
         }
         return classString
       }
-      function overOneNode(){
+      function overOneNode() {
         let classStrn = ''
         if (!t.extend) {
           if (_t === 0) {
@@ -210,8 +214,8 @@ export default {
     },
     thirdVerifyClass(_t, data, item) {
       let className = ''
-      if(item.length > 1 && _t !== data.length -1) {
-        if(data[_t+1].length>1) {
+      if (item.length > 1 && _t !== data.length - 1) {
+        if (data[_t + 1].length > 1) {
           className += 'map-third_box_row_after third-map-bottom'
         }
       }
@@ -220,7 +224,7 @@ export default {
     boxRowClass(n, data, type) {
       var rowChildisAll2 = true
       let className = ''
-      function setrowChild(){
+      function setrowChild() {
         data.forEach(item => {
           if (item.rankType === '1') {
             rowChildisAll2 = false
@@ -233,7 +237,7 @@ export default {
           className += ' m-bottom20'
         }
       }
-      if (type === '2' && n === 0 && data[n].length > 1){
+      if (type === '2' && n === 0 && data[n].length > 1) {
         setrowChild()
         if (rowChildisAll2) {
           className += ' m-top20'

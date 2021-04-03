@@ -14,10 +14,10 @@ import router from './router'
 
 import '@/icons' // icon
 import '@/permission' // permission control
-import hljs from 'highlight.js/lib/core';
+import hljs from 'highlight.js/lib/core'
 import 'highlight.js/scss/atom-one-dark.scss'
-import javascript from 'highlight.js/lib/languages/javascript';
-hljs.registerLanguage('javascript', javascript);
+import javascript from 'highlight.js/lib/languages/javascript'
+hljs.registerLanguage('javascript', javascript)
 Vue.use(hljs.vuePlugin)
 /**
  * If you don't want to use mock-server
